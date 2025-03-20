@@ -1,0 +1,72 @@
+.btn-custom-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #9525c4;
+  --bs-btn-border-color: #9525c4;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #ae26ed;
+  --bs-btn-hover-border-color: #9525c4;
+  --bs-btn-focus-shadow-rgb: 184, 42, 250;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #9525c4;
+  --bs-btn-active-border-color: #830bbf;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #9525c4;
+  --bs-btn-disabled-border-color: #9525c4;
+}
+
+
+.btn-custom-secondary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #978EA2;
+  --bs-btn-border-color: #978EA2;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #B6B0BD;
+  --bs-btn-hover-border-color: #978EA2;
+  --bs-btn-focus-shadow-rgb: 243, 235, 243;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #978EA2;
+  --bs-btn-active-border-color: #be0aaf;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #978EA2;
+  --bs-btn-disabled-border-color: #978EA2;
+}
+
+
+.btn-custom-alert {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #C4252D;
+  --bs-btn-border-color: #C4252D;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #CE8181;
+  --bs-btn-hover-border-color: #C4252D;
+  --bs-btn-focus-shadow-rgb: 242, 235, 235;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #C4252D;
+  --bs-btn-active-border-color: #bf0a0a;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #C4252D;
+  --bs-btn-disabled-border-color: #C4252D;
+}
+
+/* Stile per la Paginazione */
+/* Colore di sfondo per la pagina attiva */
+.pagination .page-item.active .page-link {
+	background-color: #9525c4;
+	color: white;
+	border-color: #9525c4;
+}
+
+/* Stile per i pulsanti disabilitati */
+.pagination .page-item.disabled .page-link {
+	background-color: white;
+	color: #9525c4;
+	border-color: #9525c4;
+}
+
+/* Colore del testo per i numeri di pagina non attivi */
+.pagination .page-item:not(.active) .page-link {
+	color: #9525c4;
+}
