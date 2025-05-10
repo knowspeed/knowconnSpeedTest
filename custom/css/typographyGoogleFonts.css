@@ -1,0 +1,68 @@
+/*
+Come usare google fonts
+
+h5 {
+  font: 400 30px/0.5 'Open Sans', sans-serif;
+}
+
+h5 è il tag del titolo
+400 è lo stile di google
+30px è la dimensione del font
+0.5 è l'interlinea
+
+*/
+
+.gfh1 {
+  font-family: 'Newsreader', serif;
+  font: 400 48px 'Newsreader', serif;
+}
+
+.gfh5 {
+  font-family: 'Newsreader', serif;
+  font: 400 25px 'Newsreader', serif;
+}
+
+.gfh6 {
+  font-family: 'Open Sans', sans-serif;
+  font: 300 18px 'Open Sans', sans-serif;
+  font-style: italic;
+}
+ 
+.gfp {
+  font-family: 'Open Sans', sans-serif;
+  font: 400 18px 'Open Sans', sans-serif;
+}
+
+
+.articleTitleLink:hover {
+      color: #000000; /* Change the color on hover */
+	  text-decoration: underline;
+    }
+	
+.articleTitleLinkEvid:hover {
+      color: #ffffff; /* Change the color on hover */
+	  text-decoration: underline;
+    }
+
+.custom-pp-border{ 
+      border-color: #b208b5 !important;
+	}
+
+.custom-pl-border{ 
+      border-color: #cc6666 !important;
+	}
+
+.custom-mr-border{ 
+      border-color: #1cb884 !important;
+	}
+	
+
+.linksty1 {
+    color: #9525c4;
+    text-decoration: none;
+}
+
+.linksty1:hover {
+    color: #c360dc;
+    text-decoration: none;
+}

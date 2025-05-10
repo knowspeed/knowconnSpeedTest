@@ -1,0 +1,13 @@
+.loading-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: #c928ff;
+      z-index: 1050;
+      transition: width 0.8s;
+    }
+    .loading-bar.hide {
+      width: 0;
+    }

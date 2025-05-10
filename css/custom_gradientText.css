@@ -1,0 +1,13 @@
+.gradient-text {
+  background: linear-gradient(to right, #4D30EE, #A63FF0, #A85AF1, #C360DC, #E689E6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 5px;
+}
+
+.gradient-text-req {
+  background: linear-gradient(to right, #ed2f2f, #f03ea9, #f25acc, #db60b6, #e68abb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 5px;
+}

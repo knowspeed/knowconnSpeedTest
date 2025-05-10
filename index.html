@@ -1,32 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="shortcut icon" href="favicon.ico">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-<meta charset="UTF-8" />
-<script type="text/javascript" src="speedtest.js"></script>
+<!doctype html>
+<html lang="it" data-bs-theme="light">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=5" />
+	<meta name="msapplication-TileColor" content="#b208b5">
+    <meta name="theme-color" content="#ffffff">
+	<title>Knowconn from LibreSpeed by Federico Dossena</title>
+	<meta name="description" content="Knowconn.com from LibreSpeed by Federico Dossena" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+	<link href="css/custom_buttons.css" rel="stylesheet">
+	<link href="css/custom_gradientText.css" rel="stylesheet">
+	
+	<!-- Bootstrap core ICONS-->
+	<link async rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+	
+	<!--Google Fonts-->
+	<link rel="stylesheet" href="custom/css/typographyGoogleFonts.css">
+
+</head>
+
+<script src="speedtest.js"></script>
 <script type="text/javascript">
 function I(i){return document.getElementById(i);}
 
 //LIST OF TEST SERVERS. Leave empty if you're doing a standalone installation. See documentation for details
-var SPEEDTEST_SERVERS=[
-	/*{	//this server doesn't actually exist, remove it
-		name:"Example Server 1", //user friendly name for the server
-		server:"//test1.mydomain.com/", //URL to the server. // at the beginning will be replaced with http:// or https:// automatically
-		dlURL:"backend/garbage.php",  //path to download test on this server (garbage.php or replacement)
-		ulURL:"backend/empty.php",  //path to upload test on this server (empty.php or replacement)
-		pingURL:"backend/empty.php",  //path to ping/jitter test on this server (empty.php or replacement)
-		getIpURL:"backend/getIP.php"  //path to getIP on this server (getIP.php or replacement)
-	},
-	{	//this server doesn't actually exist, remove it
-		name:"Example Server 2", //user friendly name for the server
-		server:"//test2.example.com/", //URL to the server. // at the beginning will be replaced with http:// or https:// automatically
-		dlURL:"garbage.php",  //path to download test on this server (garbage.php or replacement)
-		ulURL:"empty.php",  //path to upload test on this server (empty.php or replacement)
-		pingURL:"empty.php",  //path to ping/jitter test on this server (empty.php or replacement)
-		getIpURL:"getIP.php"  //path to getIP on this server (getIP.php or replacement)
-	}*/
-	//add other servers here, comma separated
+var SPEEDTEST_SERVERS=
+[
+  {
+    "name":"Bologna, Italy (GARR)",
+    "server":"//st-be-bo1.infra.garr.it",
+    "dlURL":"garbage.php",
+    "ulURL":"empty.php",
+    "pingURL":"empty.php",
+    "getIpURL":"getIP.php"
+  },
+  {
+    "name":"Roma, Italy (GARR)",
+    "server":"//st-be-rm2.infra.garr.it",
+    "dlURL":"garbage.php",
+    "ulURL":"empty.php",
+    "pingURL":"empty.php",
+    "getIpURL":"getIP.php"
+  }
 ];
 
 //INITIALIZE SPEEDTEST
@@ -198,320 +215,427 @@ function initUI(){
 	I("jitText").textContent="";
 	I("ip").textContent="";
 }
+
+
 </script>
-<style type="text/css">
-	html,body{
-		border:none; padding:0; margin:0;
-		background:#FFFFFF;
-		color:#202020;
+<style>
+	/* Stile per lo sfondo opaco con maggiore trasparenza */
+	#overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.0); /* Maggiore trasparenza */
+		display: flex;
+		justify-content: center; /* Allinea il contenuto orizzontalmente */
+		align-items: flex-start; /* Allinea il contenuto al top */
+		z-index: 9999;
 	}
-	body{
-		text-align:center;
-		font-family:"Roboto",sans-serif;
+
+	/* Stile per lo spinner */
+	.spinner {
+		border: 16px solid #F2F2F2;
+		border-top: 16px solid #C047EC;
+		border-radius: 50%;
+		width: 40px; /* Ridotto per essere all'interno del box */
+		height: 40px; /* Ridotto per essere all'interno del box */
+		animation: spin 0.8s linear infinite;
+		margin-right: 15px; /* Distanza dal testo */
 	}
-	h1{
-		color:#404040;
+
+	/* Stile per il pulsante "Annulla" */
+	#cancelButton {
+		padding: 10px 20px;
+		font-size: 16px;
+		color: #fff;
+		background-color: #C047EC;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
 	}
-	#loading{
-		background-color:#FFFFFF;
-		color:#404040;
-		text-align:center;
+
+	#cancelButton:hover {
+		background-color: #9A2BBE;
 	}
-	span.loadCircle{
-		display:inline-block;
-		width:2em;
-		height:2em;
-		vertical-align:middle;
-		background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAP1BMVEUAAAB2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZyFzwnAAAAFHRSTlMAEvRFvX406baecwbf0casimhSHyiwmqgAAADpSURBVHja7dbJbQMxAENRahnN5lkc//5rDRAkDeRgHszXgACJoKiIiIiIiIiIiIiIiIiIiIj4HHspsrpAVhdVVguzrA4OWc10WcEqpwKbnBo0OU1Q5NSpsoJFTgOecrrdEag85DRgktNqfoEdTjnd7hrEHMEJvmRUYJbTYk5Agy6nau6Abp5Cm7mDBtRdPi9gyKdU7w4p1fsLvyqs8hl4z9/w3n/Hmr9WoQ65lAU4d7lMYOz//QboRR5jBZibLMZdAR6O/Vfa1PlxNr3XdS3HzK/HVPRu/KnLs8iAOh993VpRRERERMT/fAN60wwWaVyWwAAAAABJRU5ErkJggg==');
-		background-size:2em 2em;
-		margin-right:0.5em;
-		animation: spin 0.6s linear infinite;
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
 	}
-	@keyframes spin{
-		0%{transform:rotate(0deg);}
-		100%{transform:rotate(359deg);}
+
+	/* Stile per il contenitore del messaggio */
+	.widthfull {
+		width: 100%;
 	}
-	#startStopBtn{
-		display:inline-block;
-		margin:0 auto;
-		color:#6060AA;
-		background-color:rgba(0,0,0,0);
-		border:0.15em solid #6060FF;
-		border-radius:0.3em;
-		transition:all 0.3s;
-		box-sizing:border-box;
-		width:8em; height:3em;
-		line-height:2.7em;
-		cursor:pointer;
-		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
+
+	/* Box con il messaggio */
+	.alert {
+		background-color: #9525c4;
+		color: white;
+		padding: 20px;
+		display: flex;
+		align-items: center; /* Allinea lo spinner e il testo */
+		justify-content: center;
+		width: 100%; /* Si espande per tutta la larghezza disponibile */
 	}
-	#startStopBtn:hover{
-		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
-	}
-	#startStopBtn.running{
-		background-color:#FF3030;
-		border-color:#FF6060;
-		color:#FFFFFF;
-	}
-	#startStopBtn:before{
-		content:"Start";
-	}
-	#startStopBtn.running:before{
-		content:"Abort";
-	}
-	#serverArea{
-		margin-top:1em;
-	}
-	#server{
-		font-size:1em;
-		padding:0.2em;
-	}
-	#test{
-		margin-top:2em;
-		margin-bottom:12em;
-	}
-	div.testArea{
-		display:inline-block;
-		width:16em;
-		height:12.5em;
-		position:relative;
-		box-sizing:border-box;
-	}
-	div.testArea2{
-		display:inline-block;
-		width:14em;
-		height:7em;
-		position:relative;
-		box-sizing:border-box;
-		text-align:center;
-	}
-	div.testArea div.testName{
-		position:absolute;
-		top:0.1em; left:0;
-		width:100%;
-		font-size:1.4em;
-		z-index:9;
-	}
-	div.testArea2 div.testName{
-        display:block;
-        text-align:center;
-        font-size:1.4em;
-	}
-	div.testArea div.meterText{
-		position:absolute;
-		bottom:1.55em; left:0;
-		width:100%;
-		font-size:2.5em;
-		z-index:9;
-	}
-	div.testArea2 div.meterText{
-        display:inline-block;
-        font-size:2.5em;
-	}
-	div.meterText:empty:before{
-		content:"0.00";
-	}
-	div.testArea div.unit{
-		position:absolute;
-		bottom:2em; left:0;
-		width:100%;
-		z-index:9;
-	}
-	div.testArea2 div.unit{
-		display:inline-block;
-	}
-	div.testArea canvas{
-		position:absolute;
-		top:0; left:0; width:100%; height:100%;
-		z-index:1;
-	}
-	div.testGroup{
-		display:block;
-        margin: 0 auto;
-	}
-	#shareArea{
-		width:95%;
-		max-width:40em;
-		margin:0 auto;
-		margin-top:2em;
-	}
-	#shareArea > *{
-		display:block;
-		width:100%;
-		height:auto;
-		margin: 0.25em 0;
-	}
-	#privacyPolicy{
-        position:fixed;
-        top:2em;
-        bottom:2em;
-        left:2em;
-        right:2em;
-        overflow-y:auto;
-        width:auto;
-        height:auto;
-        box-shadow:0 0 3em 1em #000000;
-        z-index:999999;
-        text-align:left;
-        background-color:#FFFFFF;
-        padding:1em;
-	}
-	a.privacy{
-        text-align:center;
-        font-size:0.8em;
-        color:#808080;
-        padding: 0 3em;
-	}
-    div.closePrivacyPolicy {
-        width: 100%;
-        text-align: center;
-    }
-    div.closePrivacyPolicy a.privacy {
-        padding: 1em 3em;
-    }
-	@media all and (max-width:40em){
-		body{
-			font-size:0.8em;
-		}
-	}
-	div.visible{
-		animation: fadeIn 0.4s;
-		display:block;
-	}
-	div.hidden{
-		animation: fadeOut 0.4s;
-		display:none;
-	}
-	@keyframes fadeIn{
-		0%{
-			opacity:0;
-		}
-		100%{
-			opacity:1;
-		}
-	}
-	@keyframes fadeOut{
-		0%{
-			display:block;
-			opacity:1;
-		}
-		100%{
-			display:block;
-			opacity:0;
-		}
-	}
-	@media all and (prefers-color-scheme: dark){
-		html,body,#loading{
-			background:#202020;
-			color:#F4F4F4;
-			color-scheme:dark;
-		}
-		h1{
-			color:#E0E0E0;
-		}
-		a{
-			color:#9090FF;
-		}
-		#privacyPolicy{
-			background:#000000;
-		}
-		#resultsImg{
-			filter: invert(1);
-		}
+
+	/* Pulsante annulla */
+	.btn-custom-secondary {
+		margin-top: 10px;
 	}
 </style>
-<title>LibreSpeed</title>
+
+<!--
+<div id="overlay">
+	<div class="widthfull text-center">
+		<div class="col-auto  text-center">
+			<div class="alert alert-light" role="alert">
+				<div class="spinner"></div>
+				<span class="fs-4">Attendi, sto misurando la velocità della tua connessione.</span>
+				<a class="btn btn-custom-secondary rounded-pill btn-lg ms-3" href="index.php" role="button">Annulla</a>
+			</div>
+		</div>
+	</div>
+</div>
+-->
 </head>
-<body onload="initServers()">
-<h1>LibreSpeed</h1>
-<div id="loading" class="visible">
-	<p id="message"><span class="loadCircle"></span>Selecting a server...</p>
-</div>
-<div id="testWrapper" class="hidden">
-	<div id="startStopBtn" onclick="startStop()"></div><br/>
-	<a class="privacy" href="#" onclick="I('privacyPolicy').style.display=''">Privacy</a>
-	<div id="serverArea">
-		Server: <select id="server" onchange="s.setSelectedServer(SPEEDTEST_SERVERS[this.value])"></select>
+<body onload="startTest(), initServers()">	
+  <div class="container px-1 text-center">
+    <div id="loading" class="visible">
+		<p class="fs-3" id="message"><span class="loadCircle"></span></p>
 	</div>
-	<div id="test">
-		<div class="testGroup">
-            <div class="testArea2">
-				<div class="testName">Ping</div>
-				<div id="pingText" class="meterText" style="color:#AA6060"></div>
-				<div class="unit">ms</div>
+<div class="row align-items-start mb-4">
+	<div class="col"></div>
+	<div class="col-md-3">
+		<div id="serverArea">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text bg-transparent border-0">
+						<i class="bi bi-globe2 gradient-text text-start" style="font-size: 2.5rem;"></i>
+					</span>
+				</div>
+				<select id="server" class="form-control rounded-pill mx-auto text-start border-0" onchange="s.setSelectedServer(SPEEDTEST_SERVERS[this.value])"></select>
+				<div class="input-group-append">
+					<span class="input-group-text bg-transparent border-0">
+						<a href="index.php"><i class="bi bi-stop-circle gradient-text-req" style="font-size: 2.5rem;"></i></a>
+					</span>
+				</div>
 			</div>
-			<div class="testArea2">
-				<div class="testName">Jitter</div>
-				<div id="jitText" class="meterText" style="color:#AA6060"></div>
-				<div class="unit">ms</div>
-			</div>
-		</div>
-		<div class="testGroup">
-			<div class="testArea">
-				<div class="testName">Download</div>
-				<canvas id="dlMeter" class="meter"></canvas>
-				<div id="dlText" class="meterText"></div>
-				<div class="unit">Mbit/s</div>
-			</div>
-			<div class="testArea">
-				<div class="testName">Upload</div>
-				<canvas id="ulMeter" class="meter"></canvas>
-				<div id="ulText" class="meterText"></div>
-				<div class="unit">Mbit/s</div>
-			</div>
-		</div>
-		<div id="ipArea">
-			<span id="ip"></span>
-		</div>
-		<div id="shareArea" style="display:none">
-			<h3>Share results</h3>
-			<p>Test ID: <span id="testId"></span></p>
-			<input type="text" value="" id="resultsURL" readonly="readonly" onclick="this.select();this.focus();this.select();document.execCommand('copy');alert('Link copied')"/>
-			<img src="" id="resultsImg" />
 		</div>
 	</div>
-	<a href="https://github.com/librespeed/speedtest">Source code</a>
+	<div class="col"></div>
 </div>
-<div id="privacyPolicy" style="display:none">
-    <h2>Privacy Policy</h2>
-    <p>This HTML5 speed test server is configured with telemetry enabled.</p>
-    <h4>What data we collect</h4>
-    <p>
-        At the end of the test, the following data is collected and stored:
-        <ul>
-            <li>Test ID</li>
-            <li>Time of testing</li>
-            <li>Test results (download and upload speed, ping and jitter)</li>
-            <li>IP address</li>
-            <li>ISP information</li>
-            <li>Approximate location (inferred from IP address, not GPS)</li>
-            <li>User agent and browser locale</li>
-            <li>Test log (contains no personal information)</li>
-        </ul>
-    </p>
-    <h4>How we use the data</h4>
-    <p>
-        Data collected through this service is used to:
-        <ul>
-            <li>Allow sharing of test results (sharable image for forums, etc.)</li>
-            <li>To improve the service offered to you (for instance, to detect problems on our side)</li>
-        </ul>
-        No personal information is disclosed to third parties.
-    </p>
-    <h4>Your consent</h4>
-    <p>
-        By starting the test, you consent to the terms of this privacy policy.
-    </p>
-    <h4>Data removal</h4>
-    <p>
-        If you want to have your information deleted, you need to provide either the ID of the test or your IP address. This is the only way to identify your data, without this information we won't be able to comply with your request.<br/><br/>
-        Contact this email address for all deletion requests: <a href="mailto:PUT@YOUR_EMAIL.HERE">TO BE FILLED BY DEVELOPER</a>.
-    </p>
-    <br/><br/>
-    <div class="closePrivacyPolicy">
-        <a class="privacy" href="#" onclick="I('privacyPolicy').style.display='none'">Close</a>
+
+
+	<div id="testWrapper">
+  <div id="test">
+    <div class="_card-body">
+      <!-- Download Section -->
+      <div class="row text-center mt-3" >
+        <div class="testArea" id="downloadSection">
+          <canvas id="downloadGauge" width="350" height="350" style="display: block; margin: 0 auto;"></canvas>
+        </div>
+        <h2 class="gradient-text text-center"><i class="bi bi-cloud-arrow-down mb-0" style="font-size: 2rem;"></i> Download</h2>
+		  <div class="d-flex justify-content-center">
+			<div class="fs-2 align-items-center" id="dlText"></div>
+			<div class="fs-2 align-items-center ms-2">Mbit/s</div>
+		  </div>      
+      </div>
+
+      <!-- Upload Section (hidden by default) -->
+      <div class="row text-center mt-3 mb-3" id="uploadSection" style="display: none;">
+        <h2 class="gradient-text text-center"><i class="bi bi-cloud-arrow-up mb-0" style="font-size: 2rem;"></i> Upload</h2>
+		  <div class="d-flex justify-content-center mb-3">
+			<div class="fs-2 align-items-center" id="ulText"></div>
+			<div class="fs-2 align-items-center ms-2">Mbit/s</div>
+		  </div>
+		<div class="testArea">
+          <canvas id="uploadGauge" width="350" height="350" style="display: block; margin: 0 auto;"></canvas>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col mb-3">
+          <input type="hidden" id="downloadResult" class="form-control" placeholder="Download speed" readonly>
+        </div>
+        <div class="col mb-3">
+          <input type="hidden" id="uploadResult" class="form-control" placeholder="Upload speed" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-mb-12 text-center">
+		<p>Copyright (C) 2016-2024 Federico Dossena</p>
+		<p class="mt-2">This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with this program. If not, see https://www.gnu.org/licenses/lgpl.
+		</p>
+		<p><a href="https://github.com/librespeed/speedtest">LibreSpeed GitHub - by Federico Dossena</a>
+		</p>
+        </div>
+      </div>	  
     </div>
-    <br/>
+  </div>
 </div>
+  </div>
+
+<script>
+  // Funzione per mostrare/nascondere le sezioni
+  function toggleSections() {
+    // Nasconde la sezione Download
+    document.getElementById("downloadSection").style.display = "none";
+
+    // Mostra la sezione Upload
+    document.getElementById("uploadSection").style.display = "block";
+  }
+
+  // Simulazione del completamento dello speedtest di download
+  document.addEventListener("DOMContentLoaded", () => {
+    // Simula il termine del test dopo 3 secondi (puoi sostituirlo con il tuo evento)
+    setTimeout(() => {
+      toggleSections();
+    }, 11000);
+  });
+</script>
+<script>
+  // Imposta il canvas e il contesto
+  const canvas = document.getElementById("downloadGauge");
+  const ctx = canvas.getContext("2d");
+
+  // Nuove dimensioni e parametri
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const radius = 160; // Raggio del tachimetro
+
+  let currentPercentage = 0; // Percentuale iniziale
+
+  // Genera il colore in base alla percentuale
+  function getColor(percentage) {
+    const intensity = Math.floor(255 * (percentage / 100));
+    return `rgb(${255 - intensity}, ${255 - intensity}, ${255})`;
+  }
+
+  // Disegna il tachimetro con tacche e numeri
+  function drawGauge(percentage) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Disegna il cerchio di base
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0.75 * Math.PI, 0.25 * Math.PI, false);
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = "#e6e6e6";
+    ctx.stroke();
+
+    // Disegna il progresso
+    const color = getColor(percentage);
+    ctx.beginPath();
+    ctx.arc(
+      centerX,
+      centerY,
+      radius,
+      0.75 * Math.PI,
+      (0.75 + 1.5 * (percentage / 100)) * Math.PI
+    );
+    ctx.lineWidth = 20;
+    ctx.strokeStyle = color;
+    ctx.stroke();
+
+    // Disegna tacche e numeri
+    for (let i = 0; i <= 10; i++) {
+      const angle = 0.75 * Math.PI + (i / 10) * 1.5 * Math.PI;
+      const xStart = centerX + (radius - 15) * Math.cos(angle);
+      const yStart = centerY + (radius - 15) * Math.sin(angle);
+      const xEnd = centerX + (radius - 5) * Math.cos(angle);
+      const yEnd = centerY + (radius - 5) * Math.sin(angle);
+
+      // Disegna tacche
+      ctx.beginPath();
+      ctx.moveTo(xStart, yStart);
+      ctx.lineTo(xEnd, yEnd);
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = "#000";
+      ctx.stroke();
+
+      // Disegna numeri
+      const xText = centerX + (radius - 30) * Math.cos(angle);
+      const yText = centerY + (radius - 30) * Math.sin(angle);
+      ctx.font = "14px Arial";
+      ctx.fillStyle = "#000";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(i * 10, xText, yText);
+    }
+
+    // Disegna la lancetta
+    const angle = (0.75 + 1.5 * (percentage / 100)) * Math.PI;
+    const needleX = centerX + radius * Math.cos(angle);
+    const needleY = centerY + radius * Math.sin(angle);
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(needleX, needleY);
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "#9525C4";
+    ctx.stroke();
+
+    // Disegna il cerchio centrale
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 10, 0, 2 * Math.PI);
+    ctx.fillStyle = "#9525C4";
+    ctx.fill();
+  }
+
+  // Funzione per aggiornare il tachimetro basandosi sul valore di dlText
+  function updateGauge() {
+    const downloadSpeed = document.getElementById("dlText").innerText;
+    const value = parseFloat(downloadSpeed) || 0;
+    const percentage = Math.min((value / 100) * 100, 100); // Calcola la percentuale (valore massimo 100)
+    drawGauge(percentage);
+  }
+
+  // Simula aggiornamenti dinamici ogni secondo per test
+  setInterval(updateGauge, 1000);
+
+// Imposta il canvas e il contesto per l'upload
+const uploadCanvas = document.getElementById("uploadGauge");
+const uploadCtx = uploadCanvas.getContext("2d");
+
+// Funzione per disegnare il tachimetro dell'upload
+function drawUploadGauge(percentage) {
+  uploadCtx.clearRect(0, 0, uploadCanvas.width, uploadCanvas.height);
+
+  // Disegna il cerchio di base
+  uploadCtx.beginPath();
+  uploadCtx.arc(centerX, centerY, radius, 0.75 * Math.PI, 0.25 * Math.PI, false);
+  uploadCtx.lineWidth = 20;
+  uploadCtx.strokeStyle = "#e6e6e6";
+  uploadCtx.stroke();
+
+  // Disegna il progresso
+  const color = getColor(percentage);
+  uploadCtx.beginPath();
+  uploadCtx.arc(
+    centerX,
+    centerY,
+    radius,
+    0.75 * Math.PI,
+    (0.75 + 1.5 * (percentage / 100)) * Math.PI
+  );
+  uploadCtx.lineWidth = 20;
+  uploadCtx.strokeStyle = color;
+  uploadCtx.stroke();
+
+  // Disegna tacche e numeri
+  for (let i = 0; i <= 10; i++) {
+    const angle = 0.75 * Math.PI + (i / 10) * 1.5 * Math.PI;
+    const xStart = centerX + (radius - 15) * Math.cos(angle);
+    const yStart = centerY + (radius - 15) * Math.sin(angle);
+    const xEnd = centerX + (radius - 5) * Math.cos(angle);
+    const yEnd = centerY + (radius - 5) * Math.sin(angle);
+
+    // Disegna tacche
+    uploadCtx.beginPath();
+    uploadCtx.moveTo(xStart, yStart);
+    uploadCtx.lineTo(xEnd, yEnd);
+    uploadCtx.lineWidth = 3;
+    uploadCtx.strokeStyle = "#000";
+    uploadCtx.stroke();
+
+    // Disegna numeri
+    const xText = centerX + (radius - 30) * Math.cos(angle);
+    const yText = centerY + (radius - 30) * Math.sin(angle);
+    uploadCtx.font = "14px Arial";
+    uploadCtx.fillStyle = "#000";
+    uploadCtx.textAlign = "center";
+    uploadCtx.textBaseline = "middle";
+    uploadCtx.fillText(i * 10, xText, yText);
+  }
+
+  // Disegna la lancetta
+  const angle = (0.75 + 1.5 * (percentage / 100)) * Math.PI;
+  const needleX = centerX + radius * Math.cos(angle);
+  const needleY = centerY + radius * Math.sin(angle);
+
+  uploadCtx.beginPath();
+  uploadCtx.moveTo(centerX, centerY);
+  uploadCtx.lineTo(needleX, needleY);
+  uploadCtx.lineWidth = 5;
+  uploadCtx.strokeStyle = "#9525C4";
+  uploadCtx.stroke();
+
+  // Disegna il cerchio centrale
+  uploadCtx.beginPath();
+  uploadCtx.arc(centerX, centerY, 10, 0, 2 * Math.PI);
+  uploadCtx.fillStyle = "#9525C4";
+  uploadCtx.fill();
+}
+
+// Funzione per aggiornare il tachimetro dell'upload
+function updateUploadGauge() {
+  const uploadSpeed = document.getElementById("ulText").innerText;
+  const value = parseFloat(uploadSpeed) || 0;
+  const percentage = Math.min((value / 100) * 100, 100); // Calcola la percentuale (valore massimo 100)
+  drawUploadGauge(percentage);
+}
+
+// Simula aggiornamenti dinamici ogni secondo per test
+setInterval(updateUploadGauge, 1000);
+  
+</script>
+
+  <script type="text/javascript">
+    setTimeout(function(){ initUI() }, 100);
+
+    // Funzione per controllare se i valori dei campi sono stabili per 5 secondi
+    function monitorResults() {
+      let uploadInput = document.getElementById("uploadResult");
+      let downloadInput = document.getElementById("downloadResult");
+      let previousUpload = uploadInput.value;
+      let previousDownload = downloadInput.value;
+      
+      setInterval(function() {
+        if (uploadInput.value && downloadInput.value && 
+            uploadInput.value === previousUpload && downloadInput.value === previousDownload) {
+          setTimeout(function() {
+            // Verifica se i valori sono ancora invariati dopo 5 secondi
+            if (uploadInput.value === previousUpload && downloadInput.value === previousDownload) {
+              postRedirect();
+            }
+          }, 5000);
+        }
+        previousUpload = uploadInput.value;
+        previousDownload = downloadInput.value;
+      }, 1000);
+    }
+
+    // Funzione per il redirect in POST
+    function postRedirect() {
+      let form = document.createElement("form");
+      form.method = "POST";
+      form.action = "newDetectConn.php";
+
+      let uploadField = document.createElement("input");
+      uploadField.type = "hidden";
+      uploadField.name = "uploadResult";
+      uploadField.value = document.getElementById("uploadResult").value;
+
+      let downloadField = document.createElement("input");
+      downloadField.type = "hidden";
+      downloadField.name = "downloadResult";
+      downloadField.value = document.getElementById("downloadResult").value;
+
+      form.appendChild(uploadField);
+      form.appendChild(downloadField);
+      document.body.appendChild(form);
+      form.submit();
+    }
+
+    // Inizializza il monitoraggio quando la pagina è caricata
+    document.addEventListener("DOMContentLoaded", function() {
+      monitorResults();
+    });
+  </script>
 </body>
 </html>
